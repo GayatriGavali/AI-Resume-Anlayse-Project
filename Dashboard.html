@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>
+    Welcome, {{ user }}, in AI CAREER
+</h2>
+
+<div class="card">
+
+    <h3>Resume Analyser</h3>
+
+    <form
+        method="POST"
+        enctype="multipart/form-data"
+    >
+
+        <textarea
+            name="resume"
+            placeholder="Paste Your Resume Here (optional)"
+        ></textarea>
+
+        <p>OR Upload File:</p>
+
+        <input
+            type="file"
+            name="file"
+            accept=".pdf,.docx"
+        >
+
+        <input
+            type="text"
+            name="role"
+            placeholder="What do you want to become? (e.g. AI Engineer, Python Developer)"
+            required
+        >
+
+        <button type="submit">
+            Analyse
+        </button>
+
+    </form>
+
+</div>
+
+
+{% if result %}
+
+<div class="red">
+
+    {% if result.error %}
+
+        <p style="color: red;">
+            ERROR: {{ result.error }}
+        </p>
+
+    {% endif %}
+
+
+    {% if result.get("skills") %}
+
+        <h3>Skills</h3>
+
+        <ul>
+
+            {% for s in result.get("skills", []) %}
+
+                <li>{{ s }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    {% endif %}
+
+
+    {% if result.get("missing_skills") %}
+
+        <h3>Missing Skills</h3>
+
+        <ul>
+
+            {% for s in result.get("missing_skills", []) %}
+
+                <li>{{ s }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    {% endif %}
+
+
+    {% if result.get("roadmap") %}
+
+        <h3>Roadmap</h3>
+
+        <ul>
+
+            {% for s in result.get("roadmap", []) %}
+
+                <li>{{ s }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    {% endif %}
+
+
+    {% if result.get("interview_questions") %}
+
+        <h3>Interview Question List</h3>
+
+        <ul>
+
+            {% for s in result.get("interview_questions", []) %}
+
+                <li>{{ s }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    {% endif %}
+
+</div>
+
+{% endif %}
+
+{% endblock %}

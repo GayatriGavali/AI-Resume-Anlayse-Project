@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <h2>Verify OTP 🔑</h2>
+
+        <p class="sub-text">
+            Enter the OTP sent to your email address.
+        </p>
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="otp"
+                placeholder="Enter 6-digit OTP"
+                maxlength="6"
+                minlength="6"
+                pattern="[0-9]{6}"
+                required
+            >
+
+            <button type="submit">
+                Verify OTP
+            </button>
+
+        </form>
+
+        <div class="auth-links">
+
+            <a href="{{ url_for('forgot_password') }}">
+                Send OTP Again
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

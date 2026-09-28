@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Your History</h2>
+
+
+{% if reports %}
+
+    {% for r in reports %}
+
+    <div class="card">
+
+        <p>
+            <strong>Job Role:</strong>
+            {{ r.job_role }}
+        </p>
+
+        <p>
+            <strong>Resume Preview:</strong>
+        </p>
+
+        <p>
+            {{ r.resume_text[:150] }}
+        </p>
+
+        <hr>
+
+
+        {% if r.result_data.get("skills") %}
+
+            <h3>Skills</h3>
+
+            <ul>
+
+                {% for s in r.result_data.get("skills", []) %}
+
+                    <li>{{ s }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        {% endif %}
+
+
+        {% if r.result_data.get("Missing_Skills") %}
+
+            <h3>Missing Skills</h3>
+
+            <ul>
+
+                {% for s in r.result_data.get("Missing_Skills", []) %}
+
+                    <li>{{ s }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        {% endif %}
+
+
+        {% if r.result_data.get("Roadmap") %}
+
+            <h3>Roadmap</h3>
+
+            <ul>
+
+                {% for s in r.result_data.get("Roadmap", []) %}
+
+                    <li>{{ s }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        {% endif %}
+
+
+        {% if r.result_data.get("Interview_Question_List") %}
+
+            <h3>Interview Question List</h3>
+
+            <ul>
+
+                {% for s in r.result_data.get("Interview_Question_List", []) %}
+
+                    <li>{{ s }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        {% endif %}
+
+    </div>
+
+    {% endfor %}
+
+
+{% else %}
+
+    <div class="card">
+
+        <p>
+            No resume analysis history found.
+        </p>
+
+    </div>
+
+{% endif %}
+
+
+{% endblock %}
